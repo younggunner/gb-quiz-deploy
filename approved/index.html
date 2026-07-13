@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>You're Approved: GreaseBook Q&amp;A Call</title>
+<link rel="canonical" href="https://quiz.greasebook.com/approved">
+<link rel="shortcut icon" href="https://www.greasebook.com/apple-touch-icon.png" type="image/png">
+
+<!-- Google Tag Manager (same container as greasebook.com) -->
+<script>
+(function(w,d,s,l,i){
+  w[l]=w[l]||[];
+  w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+  var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),
+      dl=l!='dataLayer'?'&l='+l:'';
+  j.async=true;
+  j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+  f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5PQGM83');
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+<!-- Calendly CSS — loaded early so widget renders with correct styles -->
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg-dark:#0f1114;--bg-dark-card:#1a1d23;
+  --bg-light:#fafaf9;--bg-light-alt:#f3f2ef;
+  --text-dark:#0f1114;--text-light:#fafaf9;
+  --text-muted-dark:#9ca3af;--text-muted-light:#6b7280;
+  --accent:#51A69D;--accent-hover:#448f87;--accent-glow:rgba(81,166,157,0.15);
+  --red-muted:#dc2626;--red-bg:rgba(220,38,38,0.08);
+  --green-bg:rgba(81,166,157,0.08);
+  --border-dark:rgba(255,255,255,0.08);--border-light:rgba(0,0,0,0.08);
+  --font-display:'DM Serif Display',Georgia,serif;
+  --font-body:'DM Sans',-apple-system,sans-serif;
+  --radius:8px;--radius-lg:12px;
+  --shadow-card:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);
+}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:var(--font-body);font-size:17px;background:var(--bg-light);color:var(--text-dark);line-height:1.7;overflow-x:hidden}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .top-bar__dot{animation:none !important}
+}
+
+/* TOP BAR — dark strip, matches homepage nav */
+.top-bar{
+  background:rgba(15,17,20,0.96);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border-dark);
+  padding:10px 16px;text-align:center;
+  position:sticky;top:0;z-index:1000;
+}
+.top-bar__inner{
+  max-width:800px;margin:0 auto;
+  display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;
+}
+.top-bar__dot{
+  width:8px;height:8px;border-radius:50%;background:var(--accent);
+  animation:pulse-dot 1.5s ease-in-out infinite;flex-shrink:0;
+}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.top-bar__text{font-size:13px;font-weight:500;color:var(--text-light);letter-spacing:.02em}
+.top-bar__highlight{color:var(--accent);font-weight:600}
+
+/* CONTAINER */
+.container{max-width:800px;margin:0 auto;padding:0 24px}
+.container--wide{max-width:960px}
+
+/* APPROVED HERO */
+.approved-hero{
+  padding:56px 0 40px;text-align:center;
+  background:linear-gradient(180deg,var(--accent-glow) 0%,transparent 100%);
+}
+.approved-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--green-bg);
+  border:1px solid rgba(81,166,157,.35);border-radius:999px;
+  padding:8px 20px;margin-bottom:20px;
+}
+.approved-badge__check{
+  width:20px;height:20px;border-radius:50%;background:var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;color:#fff;font-weight:700;
+}
+.approved-badge__text{font-size:14px;font-weight:600;color:var(--accent);letter-spacing:.06em;text-transform:uppercase}
+.approved-hero h1{
+  font-family:var(--font-display);
+  font-size:clamp(30px,5vw,44px);font-weight:400;line-height:1.15;
+  letter-spacing:-0.01em;margin-bottom:16px;color:var(--text-dark);
+}
+.approved-hero h1 em{color:var(--accent);font-style:normal}
+.approved-hero__sub{
+  font-size:clamp(16px,2.5vw,18px);color:var(--text-muted-light);
+  max-width:580px;margin:0 auto 8px;line-height:1.6;
+}
+.approved-hero__trust{
+  margin-top:18px;font-size:14px;color:var(--text-muted-light);
+  display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;
+}
+.approved-hero__trust b{color:#e8a33d;letter-spacing:2px;font-weight:400}
+.approved-hero__award{margin-top:20px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+.approved-hero__award img{height:64px;width:auto;border-radius:6px}
+.approved-hero__award span{font-style:italic;font-size:15.5px;color:var(--text-muted-light)}
+
+/* CALENDLY SECTION */
+.calendly-section{padding:24px 0 56px;scroll-margin-top:56px}
+.calendly-section h2{
+  font-family:var(--font-display);
+  text-align:center;font-size:clamp(24px,3.2vw,30px);font-weight:400;
+  margin-bottom:6px;color:var(--text-dark);
+}
+.calendly-section__hint{
+  text-align:center;font-size:15px;color:var(--text-muted-light);margin-bottom:20px;
+  max-width:560px;margin-left:auto;margin-right:auto;
+}
+.calendly-wrapper{overflow:visible;position:relative}
+#calendly-top,#calendly-bottom{overflow:visible !important;min-height:680px}
+
+/* WHY-NOW STRIP */
+.whynow-strip{
+  background:var(--bg-light-alt);
+  border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light);
+  padding:36px 24px;text-align:center;
+}
+.whynow-strip__inner{max-width:620px;margin:0 auto}
+.whynow-strip__headline{
+  font-family:var(--font-display);
+  font-size:20px;font-weight:400;color:var(--text-dark);margin-bottom:10px;
+}
+.whynow-strip__desc{font-size:15px;color:var(--text-muted-light);line-height:1.7;margin-bottom:10px}
+.whynow-strip__desc strong{color:var(--text-dark)}
+.whynow-strip__note{font-size:13px;color:var(--text-muted-light)}
+
+/* PRICING MODEL SECTION */
+.pricing-section{padding:64px 0}
+.pricing-section h2{
+  font-family:var(--font-display);
+  text-align:center;font-size:clamp(26px,4vw,36px);font-weight:400;margin-bottom:8px;
+}
+.pricing-section__sub{
+  text-align:center;font-size:16px;color:var(--text-muted-light);
+  max-width:600px;margin:0 auto 40px;
+}
+.compare-table{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:48px}
+@media(max-width:960px){.compare-table{grid-template-columns:1fr}.compare-card--gb{order:-1}}
+.compare-card{
+  background:#fff;border:1px solid var(--border-light);border-radius:var(--radius-lg);
+  padding:28px;box-shadow:var(--shadow-card);position:relative;
+}
+.compare-card--gb{border:2px solid var(--accent)}
+.compare-card__badge{
+  position:absolute;top:-12px;left:24px;
+  font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:3px 12px;border-radius:999px;background:var(--bg-light-alt);
+  border:1px solid var(--border-light);color:var(--text-muted-light);
+}
+.compare-card--gb .compare-card__badge{background:var(--accent);color:#fff;border-color:var(--accent)}
+.compare-card__title{font-family:var(--font-display);font-size:22px;margin:10px 0 4px}
+.compare-card__price{font-size:26px;font-weight:700;margin-bottom:2px}
+.compare-card--gb .compare-card__price{color:var(--accent)}
+.compare-card__price-note{font-size:13px;color:var(--text-muted-light);margin-bottom:14px}
+.compare-card__list{list-style:none}
+.compare-card__list li{
+  padding:7px 0 7px 26px;position:relative;font-size:15px;line-height:1.55;
+  border-bottom:1px dashed var(--border-light);
+}
+.compare-card__list li:last-child{border-bottom:none}
+.compare-card__list li::before{content:"\2715";position:absolute;left:2px;color:var(--red-muted);font-size:13px;top:9px}
+.compare-card--gb .compare-card__list li::before{content:"\2713";color:var(--accent)}
+
+/* PRICING DRIVERS */
+.drivers{
+  background:#fff;border:1px solid var(--border-light);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-card);padding:32px;max-width:720px;margin:0 auto;
+}
+.drivers h3{font-family:var(--font-display);font-size:22px;font-weight:400;margin-bottom:8px;text-align:center}
+.drivers__sub{font-size:15px;color:var(--text-muted-light);text-align:center;margin-bottom:20px}
+.drivers__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+@media(max-width:640px){.drivers__grid{grid-template-columns:1fr}}
+.driver{
+  background:var(--bg-light-alt);border-radius:var(--radius);padding:16px;text-align:center;
+}
+.driver__num{font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.driver__name{font-size:15px;font-weight:600;line-height:1.4}
+.drivers__closer{
+  text-align:center;font-size:15px;color:var(--text-dark);line-height:1.7;
+  border-top:1px solid var(--border-light);padding-top:16px;
+}
+.drivers__closer strong{color:var(--accent)}
+
+/* PROOF STATS */
+.proof-section{padding:56px 0;background:var(--bg-dark);color:var(--text-light)}
+.proof-section h2{
+  font-family:var(--font-display);text-align:center;
+  font-size:clamp(24px,3.5vw,32px);font-weight:400;margin-bottom:32px;
+}
+.proof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:860px;margin:0 auto}
+@media(max-width:720px){.proof-grid{grid-template-columns:repeat(2,1fr)}}
+.proof-stat{text-align:center;padding:20px 12px}
+.proof-stat__num{font-family:var(--font-display);font-size:34px;color:var(--accent)}
+.proof-stat__label{font-size:13px;color:var(--text-muted-dark);line-height:1.5;margin-top:4px}
+
+/* GUARANTEE */
+.guarantee{
+  max-width:680px;margin:56px auto 0;text-align:center;
+  background:var(--green-bg);border:1px solid rgba(81,166,157,.35);
+  border-radius:var(--radius-lg);padding:36px 28px;
+}
+.guarantee__icon{font-size:34px;display:block;margin-bottom:8px}
+.guarantee h3{font-family:var(--font-display);font-size:24px;font-weight:400;margin-bottom:10px}
+.guarantee__text{font-size:16px;line-height:1.7;color:var(--text-dark)}
+.guarantee__text strong{color:var(--accent)}
+.guarantee__note{font-size:13px;color:var(--text-muted-light);margin-top:10px}
+
+/* WHAT HAPPENS ON THE CALL */
+.call-steps{padding:64px 0}
+.call-steps h2{
+  font-family:var(--font-display);text-align:center;
+  font-size:clamp(24px,3.5vw,32px);font-weight:400;margin-bottom:32px;
+}
+.call-steps__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:960px){.call-steps__grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.call-steps__grid{grid-template-columns:1fr}}
+.call-step{
+  background:#fff;border:1px solid var(--border-light);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-card);padding:24px;
+}
+.call-step__num{
+  width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:700;margin-bottom:12px;
+}
+.call-step__title{font-weight:700;font-size:16px;margin-bottom:6px}
+.call-step__desc{font-size:14.5px;color:var(--text-muted-light);line-height:1.6}
+
+/* FINAL CTA */
+.final-cta{padding:56px 0 72px;background:var(--bg-light-alt);border-top:1px solid var(--border-light)}
+.final-cta h2{
+  font-family:var(--font-display);text-align:center;
+  font-size:clamp(24px,3.5vw,32px);font-weight:400;margin-bottom:8px;
+}
+.final-cta__sub{
+  text-align:center;font-size:16px;color:var(--text-muted-light);
+  max-width:600px;margin:0 auto 28px;
+}
+
+/* CTA BUTTON */
+.cta-btn{
+  display:inline-block;background:var(--accent);color:#fff;
+  font-weight:700;font-size:16px;padding:14px 28px;border-radius:var(--radius);
+  transition:background .15s ease,transform .15s ease;
+}
+.cta-btn:hover{background:var(--accent-hover);transform:translateY(-1px);text-decoration:none;color:#fff}
+.cta-btn--center{display:block;max-width:320px;margin:0 auto;text-align:center}
+
+/* FLOATING MOBILE CTA */
+.floating-cta{
+  position:fixed;bottom:16px;left:16px;right:16px;z-index:900;text-align:center;
+  transition:opacity .3s ease;
+}
+.floating-cta .cta-btn{width:100%;max-width:420px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+@media(min-width:721px){.floating-cta{display:none}}
+
+/* FOOTER */
+.page-footer{
+  background:var(--bg-dark);color:var(--text-muted-dark);
+  text-align:center;padding:32px 24px;font-size:13px;
+}
+.page-footer__logo{font-family:var(--font-display);font-size:18px;color:var(--text-light);margin-bottom:6px}
+</style>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5PQGM83" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="top-bar__inner">
+    <span class="top-bar__dot" aria-hidden="true"></span>
+    <span class="top-bar__text">Application reviewed: <span class="top-bar__highlight">your operation qualifies</span>. Book your call below.</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="approved-hero">
+  <div class="container">
+    <div class="approved-badge">
+      <span class="approved-badge__check" aria-hidden="true">&#10003;</span>
+      <span class="approved-badge__text">Application Approved</span>
+    </div>
+    <h1>You Qualified for <em>GreaseBook</em></h1>
+    <p class="approved-hero__sub">Based on your quiz answers, your operation is a strong fit. Next step: a short call with a GreaseBook solutions engineer. A few questions, a look at how the app overlays your operation, your quirks, and your workflow, and you walk out with your number. All under 20 minutes.</p>
+    <div class="approved-hero__trust">
+      <span><b>&#9733;&#9733;&#9733;&#9733;&#9733;</b>&nbsp; Capterra</span>
+      <span><b>&#9733;&#9733;&#9733;&#9733;&#9733;</b>&nbsp; G2</span>
+      <span>600+ operators &bull; 10,000+ pumpers</span>
+    </div>
+    <div class="approved-hero__award">
+      <img src="https://raw.githubusercontent.com/younggunner/tinypumper-field-images/main/peer-evaluation-logos/oil-and-gas-awards-finalist.jpg" alt="Oil &amp; Gas Awards Finalist" loading="lazy">
+      <span>&ldquo;New Technology Development of the Year!&rdquo;</span>
+    </div>
+  </div>
+</section>
+
+<!-- CALENDLY #1 -->
+<section class="calendly-section" id="book-call">
+  <div class="container">
+    <h2>Pick a Time. Walk Out With Your Number.</h2>
+    <p class="calendly-section__hint">Under 20 minutes with a GreaseBook solutions engineer. A few questions, a look at the app actually working, and your exact price. No pitch, no pressure.</p>
+    <div class="calendly-wrapper">
+      <div id="calendly-top" data-auto-load="false" style="min-width:320px;height:700px;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY NOW STRIP -->
+<div class="whynow-strip">
+  <div class="whynow-strip__inner">
+    <div class="whynow-strip__headline">Why Operators Book Now Instead of Later</div>
+    <p class="whynow-strip__desc">Every new company is rolled out by a petroleum engineer. That's why 98% of companies that start with GreaseBook succeed with it. It also means <strong>onboarding slots, not software, are the bottleneck.</strong> Want to be up and running this week? Book the call. Not pulling the trigger for another 30 or 60 days? Book it anyway: when you're ready to move, you'll already have your price and know exactly what it takes to go live.</p>
+    <p class="whynow-strip__note">You're just booking a call. Nothing to pay, nothing to sign.</p>
+  </div>
+</div>
+
+<!-- WHAT HAPPENS ON THE CALL -->
+<section class="call-steps">
+  <div class="container container--wide">
+    <h2>What Actually Happens on the Call</h2>
+    <div class="call-steps__grid">
+      <div class="call-step">
+        <div class="call-step__num">1</div>
+        <div class="call-step__title">He asks a few questions</div>
+        <div class="call-step__desc">Well count, well type, routes, what you're running today. Your price is computed from your operation, so this part comes first. He knows oil and gas workflows. Not a script reader.</div>
+      </div>
+      <div class="call-step">
+        <div class="call-step__num">2</div>
+        <div class="call-step__title">You see the app, working</div>
+        <div class="call-step__desc">A look at GreaseBook overlaid on your kind of operation: the pumper's side and yours. Ten minutes, tops. You wouldn't buy an app you've never seen, and we don't price operations we haven't talked through.</div>
+      </div>
+      <div class="call-step">
+        <div class="call-step__num">3</div>
+        <div class="call-step__title">You get your number</div>
+        <div class="call-step__desc">Per well or per pumper, whichever structure your operation calls for. By the end of the call you know exactly what GreaseBook costs.</div>
+      </div>
+      <div class="call-step">
+        <div class="call-step__num">4</div>
+        <div class="call-step__title">You decide</div>
+        <div class="call-step__desc">You'll know by the end of the call whether it's a fit. If it is, most operations are live inside a week; the biggest ones take a little longer. If it's not, say so straight. He can take it.</div>
+      </div>
+    </div>
+    <div style="margin-top:32px">
+      <a href="#book-call" class="cta-btn cta-btn--center">Pick My Time &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING MODEL -->
+<section class="pricing-section">
+  <div class="container container--wide">
+    <h2>So You're Not Surprised by the Number</h2>
+    <p class="pricing-section__sub">GreaseBook is priced per well or per pumper, monthly. One or the other, based on how your operation runs. Office and in-house users are always free. No contracts, no hardware.</p>
+
+    <div class="drivers">
+      <h3>Three Things Set Your Rate</h3>
+      <p class="drivers__sub">Your price is computed from how your operation actually runs, not pulled from thin air.</p>
+      <div class="drivers__grid">
+        <div class="driver">
+          <div class="driver__num">Driver 1</div>
+          <div class="driver__name">How many wells you run</div>
+        </div>
+        <div class="driver">
+          <div class="driver__num">Driver 2</div>
+          <div class="driver__name">How many pumpers cover your routes</div>
+        </div>
+        <div class="driver">
+          <div class="driver__num">Driver 3</div>
+          <div class="driver__name">What you need to track in your operation</div>
+        </div>
+      </div>
+      <p class="drivers__closer">One operator runs a handful of wells, each dumping into its own tank battery. Another has a hundred wells feeding one facility, and that means allocation and downtime tracking. Horizontal wells take more field hands than vertical. Some operations are gas-heavy, some are secondary recovery running injection sweeps, some are straight disposal wells. And depending on how much oil or water you make and how your gas takeaway is set up, you may need allocation or you may not. Hundreds of operations run on GreaseBook; cutting through yours takes a few minutes, not a rate card. <strong>That's why your number comes from a short call, not a web page.</strong></p>
+    </div>
+
+    <!-- GUARANTEE -->
+    <div class="guarantee">
+      <span class="guarantee__icon" aria-hidden="true">&#x1F6E1;&#xFE0F;</span>
+      <h3>The 6-Week, 6% Challenge</h3>
+      <p class="guarantee__text"><strong>6% more production in 6 weeks, or we pay you double.</strong> Run GreaseBook for 60 days. If it doesn't stick with your pumpers and pay for itself, we refund DOUBLE what you paid.</p>
+      <p class="guarantee__note">That's the 200% money-back guarantee. We can offer it because 98% of companies that start with GreaseBook succeed with it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA + CALENDLY #2 -->
+<section class="final-cta" id="book-call-bottom">
+  <div class="container">
+    <h2>You Did the Hard Part. Now Just Pick a Time.</h2>
+    <p class="final-cta__sub">You took the quiz and qualified. The last step between you and real-time production data is one short call.</p>
+    <div class="calendly-wrapper">
+      <div id="calendly-bottom" data-auto-load="false" style="min-width:320px;height:700px;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOATING MOBILE CTA -->
+<div class="floating-cta" id="floating-cta">
+  <a href="#book-call" class="cta-btn">Book My Free Call &rarr;</a>
+</div>
+
+<!-- FOOTER -->
+<footer class="page-footer">
+  <div class="page-footer__logo">GreaseBook</div>
+  <div class="page-footer__copy">&copy; 2026 Greasebook Inc. All rights reserved.</div>
+</footer>
+
+<!-- SCRIPTS -->
+<script>
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var name    = params.get('name') || '';
+  var email   = params.get('email') || '';
+  var company = params.get('a1') || '';
+  var phone   = params.get('a2') || '';
+  var info    = params.get('a3') || '';
+  var source  = params.get('source') || params.get('utm_source') || 'Not Set';
+  var medium   = params.get('utm_medium')   || '';
+  var campaign = params.get('utm_campaign') || '';
+  var term     = params.get('utm_term')     || '';
+  var content  = params.get('utm_content')  || '';
+  var gclid    = params.get('gclid')        || '';
+  var fbclid   = params.get('fbclid')       || '';
+
+  // Real GA4 client_id from _ga cookie (format: GA1.1.<cid>.<ts>)
+  function getGaClientId(){
+    var m = (document.cookie || '').match(/(?:^|;\s*)_ga=GA\d+\.\d+\.([^;]+)/);
+    return m ? m[1] : '';
+  }
+  var gaClientId = getGaClientId();
+
+  // Compact attribution token stuffed into utm_content so the Calendly
+  // webhook can recover it after the booking POST (same scheme as TP).
+  function buildAttrToken(){
+    var parts = [];
+    if (content)    parts.push(content);
+    if (gaClientId) parts.push('gacid_' + gaClientId);
+    if (gclid)      parts.push('gclid_' + gclid);
+    if (fbclid)     parts.push('fbclid_' + fbclid);
+    return parts.join('|');
+  }
+  var attrToken = buildAttrToken();
+
+  var baseUrl = 'https://calendly.com/d/cwg9-4mk-r2q/greasebook-intro-website-booking'
+    + '?hide_event_type_details=1'
+    + '&hide_gdpr_banner=1'
+    + '&primary_color=51A69D'
+    + '&embed_domain=' + encodeURIComponent(window.location.hostname)
+    + '&embed_type=Inline'
+    + '&utm_source=' + encodeURIComponent(source)
+    + (medium   ? '&utm_medium='   + encodeURIComponent(medium)   : '')
+    + (campaign ? '&utm_campaign=' + encodeURIComponent(campaign) : '')
+    + (term     ? '&utm_term='     + encodeURIComponent(term)     : '')
+    + (attrToken ? '&utm_content=' + encodeURIComponent(attrToken) : '');
+
+  // First-touch attribution to Apps Script (idempotent, first-touch wins).
+  // Same endpoint as the TP approved page — payload is email-keyed.
+  if (email) {
+    try {
+      var attrPayload = {
+        type: 'attribution',
+        data: {
+          email: email,
+          ga_client_id: gaClientId,
+          gclid: gclid,
+          fbclid: fbclid,
+          utm_source:   source,
+          utm_medium:   medium,
+          utm_campaign: campaign,
+          utm_term:     term,
+          utm_content:  content,
+          referrer:     document.referrer || '',
+          landing_page: window.location.href
+        }
+      };
+      var attrUrl = 'https://script.google.com/macros/s/AKfycbyKf_TeD4lSxWl0ablWQXgVQbsQZUsiXtp8M0vbJeBZM20Ax8lBY2fCQur_w3L7JxuIzg/exec';
+      fetch(attrUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(attrPayload)
+      }).catch(function(){ /* fire-and-forget */ });
+    } catch(_) { /* never break the booking flow */ }
+  }
+
+  var prefill = {
+    name: name,
+    email: email,
+    customAnswers: { a1: company, a2: phone, a3: info }
+  };
+
+  var initialized = false;
+
+  function initWidgets(){
+    if(initialized) return;
+    if(typeof Calendly === 'undefined'){
+      setTimeout(initWidgets, 100);
+      return;
+    }
+    initialized = true;
+    Calendly.initInlineWidget({
+      url: baseUrl,
+      parentElement: document.getElementById('calendly-top'),
+      prefill: prefill
+    });
+    Calendly.initInlineWidget({
+      url: baseUrl,
+      parentElement: document.getElementById('calendly-bottom'),
+      prefill: prefill
+    });
+  }
+
+  function loadCalendlyScript(isRetry){
+    var s = document.createElement('script');
+    s.src = 'https://assets.calendly.com/assets/external/widget.js';
+    s.async = true;
+    s.onload = initWidgets;
+    if(!isRetry){
+      s.onerror = function(){
+        setTimeout(function(){ loadCalendlyScript(true); }, 2000);
+      };
+    }
+    document.head.appendChild(s);
+  }
+
+  loadCalendlyScript(false);
+
+  // Booking event → GTM dataLayer (+ gtag/fbq guards if GTM defines them)
+  window.addEventListener('message', function(e){
+    if(e.data.event && e.data.event.indexOf('calendly') === 0){
+      if(e.data.event === 'calendly.event_scheduled'){
+        if(window.dataLayer){
+          window.dataLayer.push({event:'calendly_scheduled', funnel:'gb-approved', lead_source:source});
+        }
+        if(typeof gtag === 'function'){
+          gtag('event','Scheduled Meeting',{'event_category':'End of Funnel','event_label':source});
+        }
+        if(typeof fbq === 'function'){
+          fbq('track','Schedule');
+        }
+      }
+    }
+  });
+})();
+</script>
+
+<!-- Hide floating CTA when a calendar is visible -->
+<script>
+(function(){
+  var floatingCta = document.getElementById('floating-cta');
+  if(!floatingCta) return;
+  var topCal = document.getElementById('calendly-top');
+  var bottomCal = document.getElementById('calendly-bottom');
+
+  function checkVisibility(){
+    if(!topCal || !bottomCal) return;
+    var topRect = topCal.getBoundingClientRect();
+    var bottomRect = bottomCal.getBoundingClientRect();
+    var vh = window.innerHeight;
+    var topVisible = topRect.top < vh && topRect.bottom > 0;
+    var bottomVisible = bottomRect.top < vh && bottomRect.bottom > 0;
+    floatingCta.style.opacity = (topVisible || bottomVisible) ? '0' : '1';
+    floatingCta.style.pointerEvents = (topVisible || bottomVisible) ? 'none' : 'auto';
+  }
+  window.addEventListener('scroll', checkVisibility, {passive:true});
+  checkVisibility();
+})();
+</script>
+
+</body>
+</html>
