@@ -107,7 +107,15 @@ body{display:flex;flex-direction:column;font-family:-apple-system,BlinkMacSystem
       hidden.page_journey = JSON.stringify(journey);
     }
   } catch(e) {}
-  if (!hidden.source) hidden.source = 'InviteBakedIntoInstapage';
+  // Nothing downstream reads this field's value server-side (typeform-ga4-relay
+  // classifies off utm_source, not hidden.source) — it only surfaces raw in the
+  // Zapier Slack lead notification, so give it a real label instead of the
+  // Instapage-era placeholder that survived the July 2026 GitHub Pages port verbatim.
+  if (!hidden.source) {
+    hidden.source = hidden.utm_source
+      ? hidden.utm_source + (hidden.utm_medium ? '/' + hidden.utm_medium : '')
+      : (document.referrer ? 'referral' : 'direct');
+  }
   hidden.gb_uid = gb_uid;
   if (fbp) hidden.fbp = fbp;
   if (gaClientId) hidden.ga_client_id = gaClientId;
