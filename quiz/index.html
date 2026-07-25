@@ -75,7 +75,7 @@ body{display:flex;flex-direction:column;font-family:-apple-system,BlinkMacSystem
   var params = new URLSearchParams(window.location.search);
   var hidden = {};
   ['utm_source','utm_medium','utm_campaign','utm_content','utm_term',
-   'fbclid','gclid','source'].forEach(function (k) {
+   'fbclid','gclid','msclkid','source'].forEach(function (k) {
     var v = params.get(k);
     if (v) hidden[k] = v;
   });
@@ -105,9 +105,20 @@ body{display:flex;flex-direction:column;font-family:-apple-system,BlinkMacSystem
       // Mark non-quiz entries with domain hint for the dashboard renderer
       journey.forEach(function(j){ if (!j.d) j.d = 'gb'; });
       hidden.page_journey = JSON.stringify(journey);
+      // Readable mirror of page_journey — lets Slack/Make show a plain path
+      // string without parsing JSON, since Make has no JSON-array formula function.
+      hidden.page_journey_text = journey.map(function(j){ return j.u; }).join(' → ');
     }
   } catch(e) {}
-  if (!hidden.source) hidden.source = 'InviteBakedIntoInstapage';
+  // Nothing downstream reads this field's value server-side (typeform-ga4-relay
+  // classifies off utm_source, not hidden.source) — it only surfaces raw in the
+  // Zapier Slack lead notification, so give it a real label instead of the
+  // Instapage-era placeholder that survived the July 2026 GitHub Pages port verbatim.
+  if (!hidden.source) {
+    hidden.source = hidden.utm_source
+      ? hidden.utm_source + (hidden.utm_medium ? '/' + hidden.utm_medium : '')
+      : (document.referrer ? 'referral' : 'direct');
+  }
   hidden.gb_uid = gb_uid;
   if (fbp) hidden.fbp = fbp;
   if (gaClientId) hidden.ga_client_id = gaClientId;
