@@ -83,7 +83,7 @@ body{display:flex;flex-direction:column;font-family:-apple-system,BlinkMacSystem
   if (!hidden.utm_source && !hidden.utm_medium && !hidden.utm_campaign) {
     try {
       var ft = JSON.parse(localStorage.getItem('gb_first_touch') || 'null');
-      if (ft) ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','fbclid','landing_page','referrer'].forEach(function(k) {
+      if (ft) ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','msclkid','fbclid','landing_page','referrer'].forEach(function(k) {
         if (ft[k] && !hidden[k]) hidden[k] = ft[k];
       });
     } catch(e) {}
@@ -96,7 +96,7 @@ body{display:flex;flex-direction:column;font-family:-apple-system,BlinkMacSystem
       var gbAttr = JSON.parse(gbAttrRaw);
       if (gbAttr.origin_referrer && !hidden.origin_referrer) hidden.origin_referrer = gbAttr.origin_referrer;
       // Pull UTMs from cookie when URL didn't have any (organic → /quiz directly)
-      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','fbclid'].forEach(function(k){
+      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','msclkid','fbclid'].forEach(function(k){
         if (gbAttr[k] && !hidden[k]) hidden[k] = gbAttr[k];
       });
       // Build page_journey: greasebook.com hops (from cookie) + current quiz pageview
