@@ -75,7 +75,7 @@ body{display:flex;flex-direction:column;font-family:-apple-system,BlinkMacSystem
   var params = new URLSearchParams(window.location.search);
   var hidden = {};
   ['utm_source','utm_medium','utm_campaign','utm_content','utm_term',
-   'fbclid','gclid','source'].forEach(function (k) {
+   'fbclid','gclid','msclkid','source'].forEach(function (k) {
     var v = params.get(k);
     if (v) hidden[k] = v;
   });
