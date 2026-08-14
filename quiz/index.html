@@ -28,7 +28,7 @@ body{display:flex;flex-direction:column;font-family:-apple-system,BlinkMacSystem
 .logo-bar{background:#0f1114;padding:14px 20px;text-align:center;flex-shrink:0}
 .logo-bar img{height:34px;width:auto;vertical-align:middle}
 .tf-wrap{flex:1 1 auto;min-height:0}
-#typeform-full{width:100%;height:100%;border:0;display:block}
+#tf-gb-widget{width:100% !important;height:100% !important}
 </style>
 </head>
 <body>
@@ -39,7 +39,22 @@ body{display:flex;flex-direction:column;font-family:-apple-system,BlinkMacSystem
 </div>
 
 <div class="tf-wrap">
-  <iframe id="typeform-full" allow="camera; microphone; autoplay; encrypted-media; fullscreen"></iframe>
+  <!-- Official Typeform embed SDK widget (converted from raw iframe 2026-08-14,
+       mirroring the proven TP quiz pattern). WHY: the SDK fires the
+       data-tf-on-* callbacks (question-changed etc.) that feed quiz_progress —
+       the raw iframe emitted no events, so per-question abandonment was
+       unmeasurable. Hidden fields move from iframe URL params to
+       data-tf-hidden (same fields, same relay; TP proves the round-trip). -->
+  <div id="tf-gb-widget"
+       data-tf-widget="sTbsRn"
+       data-tf-opacity="100"
+       data-tf-iframe-props="title=GreaseBook Quiz"
+       data-tf-transitive-search-params
+       data-tf-medium="snippet"
+       data-tf-on-ready="tfQuizReady"
+       data-tf-on-question-changed="tfQuizQuestion"
+       data-tf-on-submit="tfQuizSubmit"
+       style="width:100%;height:100%;"></div>
 </div>
 
 <!-- Attribution script — ported VERBATIM from the live Instapage page (captured 2026-07-13).
@@ -127,17 +142,30 @@ body{display:flex;flex-direction:column;font-family:-apple-system,BlinkMacSystem
   hidden.landing_page = window.location.origin + window.location.pathname;
   if (document.referrer) hidden.referrer = document.referrer;
 
-  function buildSrc() {
-    var qs = Object.keys(hidden).map(function (k) {
-      return encodeURIComponent(k) + '=' + encodeURIComponent(hidden[k]);
-    }).join('&');
-    return 'https://form.typeform.com/to/sTbsRn' + (qs ? '?' + qs : '');
+  // Write hidden fields onto the widget div as data-tf-hidden (SDK pattern,
+  // 2026-08-14 — replaces the old iframe URL-param build). Mirror of the TP
+  // quiz's applyHidden: any non-string value gets JSON.stringify'd, then every
+  // value is encodeURIComponent'd. Typeform's data-tf-hidden parser splits on
+  // ',' then '=' and does NOT decode — the edge function (typeform-ga4-relay)
+  // safe-decodes on intake, so encoding here is what survives the round-trip.
+  function applyHidden() {
+    var w = document.getElementById('tf-gb-widget');
+    if (!w) return;
+    Object.keys(hidden).forEach(function (k) {
+      if (typeof hidden[k] === 'object' && hidden[k] !== null) {
+        hidden[k] = JSON.stringify(hidden[k]);
+      }
+    });
+    var s = Object.keys(hidden).map(function (k) {
+      return k + '=' + encodeURIComponent(hidden[k]);
+    }).join(',');
+    w.setAttribute('data-tf-hidden', s);
   }
+  applyHidden();
 
-  var iframe = document.getElementById('typeform-full');
-  iframe.src = buildSrc();
-
-  // Retry GA4 client_id capture — cookie may not be set on first paint
+  // Retry GA4 client_id capture — cookie may not be set on first paint.
+  // If embed.js already rendered the iframe, a late update may not propagate —
+  // accepted tradeoff for fresh visitors (same note as the TP quiz).
   function retryGa() {
     if (hidden.ga_client_id) return;
     var m = document.cookie.match('(^|;)\\s*_ga=([^;]+)');
@@ -145,7 +173,7 @@ body{display:flex;flex-direction:column;font-family:-apple-system,BlinkMacSystem
       var gp = decodeURIComponent(m[2]).split('.');
       if (gp.length >= 4) {
         hidden.ga_client_id = gp[2] + '.' + gp[3];
-        iframe.src = buildSrc();
+        applyHidden();
       }
     }
   }
@@ -153,9 +181,50 @@ body{display:flex;flex-direction:column;font-family:-apple-system,BlinkMacSystem
   setTimeout(retryGa, 3500);
 
   // Debug: browser console → __gbAttribution()
-  window.__gbAttribution = function() { return { gb_uid: gb_uid, hidden: hidden, src: iframe.src }; };
+  window.__gbAttribution = function() { return { gb_uid: gb_uid, hidden: hidden }; };
 })();
 </script>
+
+<!-- Quiz progress telemetry (Greg, 2026-08-14): which question do people
+     abandon at, per campaign? The embed SDK fires the data-tf-on-* callbacks
+     declared on the widget div (free, part of embed.js — no paid Typeform
+     feature). Each event beacons one row to the quiz-progress Supabase edge
+     function; analysis = last question_ref seen per visit with no submit row.
+     Handlers MUST be defined before embed.js loads. Never breaks the quiz. -->
+<script>
+(function () {
+  try {
+    var EP = 'https://nhdethynnmgrqlswqiqj.supabase.co/functions/v1/quiz-progress';
+    var vid = 'q' + Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+    var seq = 0;
+    var attr = { utm_source: '', utm_campaign: '', utm_term: '' };
+    try {
+      var h = (window.__gbAttribution && window.__gbAttribution().hidden) || {};
+      attr.utm_source = h.utm_source || '';
+      attr.utm_campaign = h.utm_campaign || '';
+      attr.utm_term = h.utm_term || '';
+    } catch (e) {}
+    function beacon(event, formId, ref) {
+      try {
+        seq += 1;
+        var payload = JSON.stringify({
+          visit_id: vid, brand: 'gb', form_id: formId || '', event: event,
+          ref: ref || '', seq: seq,
+          utm_source: attr.utm_source, utm_campaign: attr.utm_campaign,
+          utm_term: attr.utm_term
+        });
+        if (navigator.sendBeacon) {
+          navigator.sendBeacon(EP, new Blob([payload], { type: 'text/plain' }));
+        }
+      } catch (e) {}
+    }
+    window.tfQuizReady = function (p) { beacon('ready', p && p.formId); };
+    window.tfQuizQuestion = function (p) { beacon('question', p && p.formId, p && p.ref); };
+    window.tfQuizSubmit = function (p) { beacon('submit', p && p.formId); };
+  } catch (e) { /* never break the quiz */ }
+})();
+</script>
+<script src="//embed.typeform.com/next/embed.js"></script>
 
 </body>
 </html>
