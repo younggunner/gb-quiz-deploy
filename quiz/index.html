@@ -29,18 +29,6 @@ body{display:flex;flex-direction:column;font-family:-apple-system,BlinkMacSystem
 .logo-bar img{height:34px;width:auto;vertical-align:middle}
 .tf-wrap{flex:1 1 auto;min-height:0}
 #tf-gb-widget{width:100% !important;height:100% !important}
-/* SMS disclosure — 10DLC/carrier compliance for the JustCall registration.
-   WHY (Greg approved 2026-08-18, "Option 1" of Tony's Aug 15 email): carriers scrape the
-   page that collects the phone number and hard-block unregistered traffic when no SMS
-   consent text is present. Lives on the wrapper, not in the Typeform, because Typeform
-   renders no element below its OK button and a bot that doesn't run Typeform's JS still
-   sees this in the served HTML. Deliberately passive text, not a checkbox — Greg's call
-   was minimum funnel friction. TEMPORARY: remove once JustCall clears its smoke test
-   (~2026-09-15) by reverting this block and the .sms-legal div. */
-.sms-legal{flex-shrink:0;background:#0f1114;padding:10px 20px 14px;text-align:center}
-.sms-legal p{max-width:640px;margin:0 auto;color:#767c83;font-size:11px;line-height:1.5}
-.sms-legal a{color:#98a0a7;text-decoration:underline}
-.sms-legal a:hover,.sms-legal a:focus-visible{color:#c3cad0}
 </style>
 </head>
 <body>
@@ -67,10 +55,6 @@ body{display:flex;flex-direction:column;font-family:-apple-system,BlinkMacSystem
        data-tf-on-question-changed="tfQuizQuestion"
        data-tf-on-submit="tfQuizSubmit"
        style="width:100%;height:100%;"></div>
-</div>
-
-<div class="sms-legal">
-  <p>By providing your number, you agree to receive client-related texts from GreaseBook. Msg freq varies. Msg&amp;Data rates may apply. Reply STOP to opt out. See <a href="https://www.greasebook.com/blog/greasebook-terms-of-service/">Terms</a> &amp; <a href="https://www.greasebook.com/blog/greasebook-privacy-policy/">Privacy Policy</a>.</p>
 </div>
 
 <!-- Attribution script — ported VERBATIM from the live Instapage page (captured 2026-07-13).
