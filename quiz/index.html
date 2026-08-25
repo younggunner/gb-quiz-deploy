@@ -85,7 +85,7 @@ body{font-family:var(--font-body);overflow-x:hidden}
 }
 :root[data-variant="b"] body{display:block;font-size:17px;line-height:1.7}
 .v-b{min-height:0}
-.v-b .logo-bar{background:var(--bg-dark);padding:14px 20px;text-align:center;border-bottom:1px solid var(--border-dark)}
+.v-b .logo-bar{position:sticky;top:0;z-index:20;background:var(--bg-dark);padding:14px 20px;text-align:center;border-bottom:1px solid var(--border-dark)}
 .v-b .logo-bar img{height:34px;width:auto;vertical-align:middle}
 .b-wrap{max-width:760px;margin:0 auto;padding:0 24px}
 .b-hero{
@@ -116,7 +116,33 @@ body{font-family:var(--font-body);overflow-x:hidden}
   margin:0 0 28px;padding:16px 20px;border-left:3px solid var(--accent);
   background:rgba(81,166,157,.08);border-radius:0 var(--radius) var(--radius) 0;
 }
-@media(min-width:768px){.b-hero-inner{max-width:760px}}
+.hero-mockup{position:relative;min-height:520px;display:flex;align-items:center;justify-content:center}
+.phone-frame{
+  position:absolute;width:240px;border-radius:36px;background:#000;padding:12px;
+  box-shadow:0 25px 60px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.08);
+}
+.phone-frame-inner{border-radius:26px;overflow:hidden;background:#fff;position:relative;aspect-ratio:9/19.5}
+.phone-frame-inner video{
+  width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;
+}
+.phone-frame-inner video::-webkit-media-controls,
+.phone-frame-inner video::-webkit-media-controls-enclosure,
+.phone-frame-inner video::-webkit-media-controls-start-playback-button{
+  display:none !important;-webkit-appearance:none;opacity:0;pointer-events:none;width:0;height:0;
+}
+.phone-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:90px;height:28px;background:#000;border-radius:0 0 18px 18px;z-index:2}
+.phone-back{right:10%;top:0;z-index:1;transform:rotate(2deg)}
+.phone-front{left:8%;top:40px;z-index:2;transform:rotate(-1deg)}
+@media(min-width:768px){.b-hero-inner{grid-template-columns:55% 1fr}}
+@media(max-width:900px){.hero-mockup{min-height:440px}.phone-frame{width:200px}.phone-back{right:0}.phone-front{left:0}}
+@media(max-width:767px){
+  .hero-mockup{min-height:380px}
+  .phone-frame{width:170px;border-radius:28px;padding:8px}
+  .phone-frame-inner{border-radius:22px}
+  .phone-notch{width:70px;height:22px;border-radius:0 0 14px 14px}
+  .phone-back{right:-5%}
+  .phone-front{left:-5%;top:30px}
+}
 .cta{
   display:inline-block;background:var(--accent);color:#fff;font-weight:600;
   font-size:16px;padding:16px 36px;border-radius:6px;text-decoration:none;
@@ -124,9 +150,7 @@ body{font-family:var(--font-body);overflow-x:hidden}
 }
 .cta:hover{background:var(--accent-hover);text-decoration:none;color:#fff;transform:translateY(-1px)}
 .micro-copy{font-size:14px;color:var(--text-muted-dark);margin-top:12px}
-.quiz-veil{position:fixed;inset:0;background:rgba(8,10,12,.78);opacity:0;pointer-events:none;z-index:8;transition:opacity .4s ease}
-html.quiz-focus .quiz-veil{opacity:1}
-.b-quiz{padding:36px 0 16px;position:relative;z-index:9}
+.b-quiz{padding:20px 0 28px;position:relative;z-index:9}
 .quiz-head{text-align:center;max-width:560px;margin:0 auto 18px}
 .quiz-kicker{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
 .quiz-head h2{font-family:var(--font-display);font-size:clamp(22px,3.4vw,30px);font-weight:400;color:#fff;margin:0 0 8px}
@@ -138,7 +162,7 @@ html.quiz-focus .quiz-veil{opacity:1}
   outline:2px solid var(--accent);
   transition:box-shadow .4s ease,transform .4s ease;
 }
-html.quiz-focus .quiz-card{box-shadow:0 0 0 4px var(--accent),0 28px 90px rgba(0,0,0,.55)}
+
 .quiz-card [data-tf-widget]{width:100% !important;min-height:420px;max-height:640px;height:auto !important}
 .quiz-card iframe{max-height:640px}
 .micro{
@@ -162,6 +186,7 @@ html.quiz-focus .quiz-card{box-shadow:0 0 0 4px var(--accent),0 28px 90px rgba(0
 .sig-name{font-weight:700;color:#fff}
 .sig-title{font-size:13px;color:var(--text-muted-dark);line-height:1.4}
 .b-cta{padding:8px 0 48px;text-align:center}
+.b-cta-mid{padding:28px 0 8px;text-align:center}
 .page-footer{background:#0a0c0e;color:var(--text-muted-dark);text-align:center;padding:28px 20px 20px;font-size:13px;margin:0}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
@@ -189,35 +214,11 @@ html.quiz-focus .quiz-card{box-shadow:0 0 0 4px var(--accent),0 28px 90px rgba(0
   </div>
 </div>
 
-<!-- VARIANT B: short reminder lander
-     snapshot of greasebook-deploy/index.html hero copy + proof bullets + #guarantee.
-     Press logos rehosted from homepage as-seen-in set. No video (quiz is the job). -->
+<!-- VARIANT B: quiz first, then homepage hero (looping phones) + reminder sections. -->
 <div class="v-b">
-  <div class="quiz-veil" aria-hidden="true"></div>
   <div class="logo-bar">
     <img src="../assets/gb-logo-alt.png" alt="GreaseBook">
   </div>
-
-  <section class="b-hero">
-    <div class="b-hero-inner">
-      <div class="b-hero-copy">
-        <p class="pre">For independent operators running 2 to 2,000 wells</p>
-        <h1>Every Decision You Make About Your Wells Is Based on Numbers You Can't Verify.</h1>
-        <p class="sub">Greasebook gets production data from your pumper's phone to your screen instantly. No paper. No Excel. No chasing anyone down.</p>
-        <p class="hero-authority"><em>Built in the oil patch by pumpers, field supervisors, engineers, and operators like you. 15 years of feedback from the people who actually do the work.</em></p>
-        <ul class="proof-bullets">
-          <li>&rarr; <span>8-minute pumper learning curve</span> if he can text, he can use Greasebook</li>
-          <li>&rarr; <span>Turnkey setup</span> our petroleum engineers build it all for you</li>
-          <li>&rarr; <span>200% money-back guarantee</span> doesn't work? We don't just refund you. We pay you double.</li>
-        </ul>
-        <p class="hero-reciprocity"><em>Here's a free rule of thumb: if your production data is more than 48 hours old, you're making decisions on stale numbers. Most operators we work with are running 2-3 weeks behind.</em></p>
-        <div>
-          <a class="cta" href="#tf-quiz">Take the 60-Second Quiz</a>
-          <p class="micro-copy">If it's a fit, you'll get a calendar immediately to book a call with one of our production specialists. If not, no big deal, you'll know in two minutes either way.</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <section class="b-quiz" id="tf-quiz">
     <div class="b-wrap">
@@ -244,6 +245,45 @@ html.quiz-focus .quiz-card{box-shadow:0 0 0 4px var(--accent),0 28px 90px rgba(0
     </div>
   </section>
 
+  <section class="b-hero">
+    <div class="b-hero-inner">
+      <div class="b-hero-copy">
+        <p class="pre">For independent operators running 2 to 2,000 wells</p>
+        <h1>Every Decision You Make About Your Wells Is Based on Numbers You Can't Verify.</h1>
+        <p class="sub">Greasebook gets production data from your pumper's phone to your screen instantly. No paper. No Excel. No chasing anyone down.</p>
+        <p class="hero-authority"><em>Built in the oil patch by pumpers, field supervisors, engineers, and operators like you. 15 years of feedback from the people who actually do the work.</em></p>
+        <ul class="proof-bullets">
+          <li>&rarr; <span>8-minute pumper learning curve</span> if he can text, he can use Greasebook</li>
+          <li>&rarr; <span>Turnkey setup</span> our petroleum engineers build it all for you</li>
+          <li>&rarr; <span>200% money-back guarantee</span> doesn't work? We don't just refund you. We pay you double.</li>
+        </ul>
+        <p class="hero-reciprocity"><em>Here's a free rule of thumb: if your production data is more than 48 hours old, you're making decisions on stale numbers. Most operators we work with are running 2-3 weeks behind.</em></p>
+        <div>
+          <a class="cta" href="#tf-quiz">Back to the 60-Second Quiz</a>
+          <p class="micro-copy">If it's a fit, you'll get a calendar immediately to book a call with one of our production specialists. If not, no big deal, you'll know in two minutes either way.</p>
+        </div>
+      </div>
+      <div class="hero-mockup" aria-hidden="true">
+        <div class="phone-frame phone-back">
+          <div class="phone-frame-inner">
+            <div class="phone-notch"></div>
+            <video autoplay loop muted playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback">
+              <source src="https://raw.githubusercontent.com/younggunner/tinypumper-field-images/main/phone1.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="phone-frame phone-front">
+          <div class="phone-frame-inner">
+            <div class="phone-notch"></div>
+            <video autoplay loop muted playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback">
+              <source src="https://raw.githubusercontent.com/younggunner/tinypumper-field-images/main/video-2.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="b-press">
     <div class="b-wrap">
       <p class="label">As Seen In</p>
@@ -255,6 +295,9 @@ html.quiz-focus .quiz-card{box-shadow:0 0 0 4px var(--accent),0 28px 90px rgba(0
         <img src="../assets/press-american-og-reporter.webp" alt="The American Oil &amp; Gas Reporter">
         <img src="../assets/press-oilvoice.webp" alt="OilVoice">
       </div>
+    </div>
+    <div class="b-cta-mid">
+      <a class="cta" href="#tf-quiz">Back to the 60-Second Quiz</a>
     </div>
   </section>
 
@@ -279,7 +322,7 @@ html.quiz-focus .quiz-card{box-shadow:0 0 0 4px var(--accent),0 28px 90px rgba(0
   </section>
 
   <div class="b-cta">
-    <a class="cta" href="#tf-quiz">Take the 60-Second Quiz</a>
+    <a class="cta" href="#tf-quiz">Back to the 60-Second Quiz</a>
     <p class="micro">If it's a fit, you'll get a calendar immediately to book a call with one of our production specialists. If not, no big deal, you'll know in two minutes either way.</p>
   </div>
 
@@ -294,14 +337,21 @@ html.quiz-focus .quiz-card{box-shadow:0 0 0 4px var(--accent),0 28px 90px rgba(0
     if (el.parentNode) el.parentNode.removeChild(el);
   });
   if (document.documentElement.dataset.variant === 'b') {
-    var card = document.querySelector('.quiz-card');
-    if (card && 'IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function (entries) {
-        var hit = entries[0];
-        document.documentElement.classList.toggle('quiz-focus', !!(hit && hit.isIntersecting && hit.intersectionRatio >= 0.4));
-      }, { threshold: [0.25, 0.4, 0.6, 0.8] });
-      io.observe(card);
-    }
+    document.querySelectorAll('.phone-frame-inner video').forEach(function (v) {
+      v.muted = true;
+      v.defaultMuted = true;
+      v.playsInline = true;
+      v.setAttribute('playsinline', '');
+      v.setAttribute('webkit-playsinline', '');
+      v.loop = true;
+      v.controls = false;
+      function kick() { v.play().catch(function () {}); }
+      kick();
+      v.addEventListener('pause', function () { if (!document.hidden) kick(); });
+      ['touchstart', 'click', 'scroll'].forEach(function (ev) {
+        window.addEventListener(ev, kick, { passive: true });
+      });
+    });
   }
 })();
 </script>
