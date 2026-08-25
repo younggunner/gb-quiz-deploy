@@ -116,33 +116,7 @@ body{font-family:var(--font-body);overflow-x:hidden}
   margin:0 0 28px;padding:16px 20px;border-left:3px solid var(--accent);
   background:rgba(81,166,157,.08);border-radius:0 var(--radius) var(--radius) 0;
 }
-.hero-mockup{position:relative;min-height:520px;display:flex;align-items:center;justify-content:center}
-.phone-frame{
-  position:absolute;width:240px;border-radius:36px;background:#000;padding:12px;
-  box-shadow:0 25px 60px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.08);
-}
-.phone-frame-inner{border-radius:26px;overflow:hidden;background:#fff;position:relative;aspect-ratio:9/19.5}
-.phone-frame-inner video{
-  width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;
-}
-.phone-frame-inner video::-webkit-media-controls,
-.phone-frame-inner video::-webkit-media-controls-enclosure,
-.phone-frame-inner video::-webkit-media-controls-start-playback-button{
-  display:none !important;-webkit-appearance:none;opacity:0;pointer-events:none;width:0;height:0;
-}
-.phone-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:90px;height:28px;background:#000;border-radius:0 0 18px 18px;z-index:2}
-.phone-back{right:10%;top:0;z-index:1;transform:rotate(2deg)}
-.phone-front{left:8%;top:40px;z-index:2;transform:rotate(-1deg)}
-@media(min-width:768px){.b-hero-inner{grid-template-columns:55% 1fr}}
-@media(max-width:900px){.hero-mockup{min-height:440px}.phone-frame{width:200px}.phone-back{right:0}.phone-front{left:0}}
-@media(max-width:767px){
-  .hero-mockup{min-height:380px}
-  .phone-frame{width:170px;border-radius:28px;padding:8px}
-  .phone-frame-inner{border-radius:22px}
-  .phone-notch{width:70px;height:22px;border-radius:0 0 14px 14px}
-  .phone-back{right:-5%}
-  .phone-front{left:-5%;top:30px}
-}
+@media(min-width:768px){.b-hero-inner{max-width:760px}}
 .cta{
   display:inline-block;background:var(--accent);color:#fff;font-weight:600;
   font-size:16px;padding:16px 36px;border-radius:6px;text-decoration:none;
@@ -175,15 +149,6 @@ html.quiz-focus .quiz-card{box-shadow:0 0 0 4px var(--accent),0 28px 90px rgba(0
 .b-press .label{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted-dark);margin-bottom:16px}
 .press-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:22px 28px}
 .press-row img{height:22px;width:auto;opacity:.7;filter:brightness(0) invert(1)}
-.b-video{padding:40px 0 8px;text-align:center}
-.b-video h2{font-family:var(--font-display);font-size:clamp(22px,3.4vw,30px);font-weight:400;margin-bottom:24px}
-.yt{
-  position:relative;width:100%;max-width:720px;margin:0 auto;aspect-ratio:16/9;
-  border-radius:12px;overflow:hidden;background:#000;cursor:pointer;
-  box-shadow:0 8px 32px rgba(0,0,0,.4);
-}
-.yt img{width:100%;height:100%;object-fit:cover;display:block}
-.yt svg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:72px;height:72px;opacity:.9;filter:drop-shadow(0 4px 12px rgba(0,0,0,.5))}
 .b-guarantee{padding:40px 0}
 .guarantee-box{
   background:var(--bg-dark-card);border:1px solid var(--border-dark);border-radius:var(--radius-lg);
@@ -225,9 +190,8 @@ html.quiz-focus .quiz-card{box-shadow:0 0 0 4px var(--accent),0 28px 90px rgba(0
 </div>
 
 <!-- VARIANT B: short reminder lander
-     snapshot of greasebook-deploy/index.html hero (copy + dual phones +
-     proof bullets), homepage explainer video g1LBVdP4ptw, #guarantee.
-     Press logos rehosted from homepage as-seen-in set. -->
+     snapshot of greasebook-deploy/index.html hero copy + proof bullets + #guarantee.
+     Press logos rehosted from homepage as-seen-in set. No video (quiz is the job). -->
 <div class="v-b">
   <div class="quiz-veil" aria-hidden="true"></div>
   <div class="logo-bar">
@@ -250,24 +214,6 @@ html.quiz-focus .quiz-card{box-shadow:0 0 0 4px var(--accent),0 28px 90px rgba(0
         <div>
           <a class="cta" href="#tf-quiz">Take the 60-Second Quiz</a>
           <p class="micro-copy">If it's a fit, you'll get a calendar immediately to book a call with one of our production specialists. If not, no big deal, you'll know in two minutes either way.</p>
-        </div>
-      </div>
-      <div class="hero-mockup" aria-hidden="true">
-        <div class="phone-frame phone-back">
-          <div class="phone-frame-inner">
-            <div class="phone-notch"></div>
-            <video autoplay loop muted playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback">
-              <source src="https://raw.githubusercontent.com/younggunner/tinypumper-field-images/main/phone1.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-        <div class="phone-frame phone-front">
-          <div class="phone-frame-inner">
-            <div class="phone-notch"></div>
-            <video autoplay loop muted playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback">
-              <source src="https://raw.githubusercontent.com/younggunner/tinypumper-field-images/main/video-2.mp4" type="video/mp4">
-            </video>
-          </div>
         </div>
       </div>
     </div>
@@ -308,16 +254,6 @@ html.quiz-focus .quiz-card{box-shadow:0 0 0 4px var(--accent),0 28px 90px rgba(0
         <img src="../assets/press-epmag.webp" alt="E&amp;P Magazine">
         <img src="../assets/press-american-og-reporter.webp" alt="The American Oil &amp; Gas Reporter">
         <img src="../assets/press-oilvoice.webp" alt="OilVoice">
-      </div>
-    </div>
-  </section>
-
-  <section class="b-video">
-    <div class="b-wrap">
-      <h2>Watch Greasebook Explainer Video</h2>
-      <div class="yt" id="yt-player" onclick="this.innerHTML='<iframe src=\'https://www.youtube.com/embed/g1LBVdP4ptw?autoplay=1&rel=0&modestbranding=1\' title=\'Watch Greasebook Explainer Video\' frameborder=\'0\' allow=\'accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture\' allowfullscreen style=\'position:absolute;top:0;left:0;width:100%;height:100%\'></iframe>';this.style.cursor='default';this.onclick=null">
-        <img src="https://img.youtube.com/vi/g1LBVdP4ptw/hqdefault.jpg" alt="Watch Greasebook Explainer Video" loading="lazy">
-        <svg viewBox="0 0 68 48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="red"/><path d="M45 24L27 14v20" fill="#fff"/></svg>
       </div>
     </div>
   </section>
@@ -366,21 +302,6 @@ html.quiz-focus .quiz-card{box-shadow:0 0 0 4px var(--accent),0 28px 90px rgba(0
       }, { threshold: [0.25, 0.4, 0.6, 0.8] });
       io.observe(card);
     }
-    document.querySelectorAll('.phone-frame-inner video').forEach(function (v) {
-      v.muted = true;
-      v.defaultMuted = true;
-      v.playsInline = true;
-      v.setAttribute('playsinline', '');
-      v.setAttribute('webkit-playsinline', '');
-      v.loop = true;
-      v.controls = false;
-      function kick() { v.play().catch(function () {}); }
-      kick();
-      v.addEventListener('pause', function () { if (!document.hidden) kick(); });
-      ['touchstart', 'click', 'scroll'].forEach(function (ev) {
-        window.addEventListener(ev, kick, { passive: true });
-      });
-    });
   }
 })();
 </script>
