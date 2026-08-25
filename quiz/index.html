@@ -80,8 +80,11 @@ body{font-family:var(--font-body);overflow-x:hidden}
 .v-a .tf-wrap{flex:1 1 auto;min-height:0}
 .v-a [data-tf-widget]{width:100% !important;height:100% !important}
 
-:root[data-variant="b"],:root[data-variant="b"] body{height:auto;min-height:100%;background:var(--bg-dark);color:var(--text-light)}
+:root[data-variant="b"],:root[data-variant="b"] html,:root[data-variant="b"] body{
+  height:auto !important;min-height:0 !important;background:var(--bg-dark);color:var(--text-light)
+}
 :root[data-variant="b"] body{display:block;font-size:17px;line-height:1.7}
+.v-b{min-height:0}
 .v-b .logo-bar{background:var(--bg-dark);padding:14px 20px;text-align:center;border-bottom:1px solid var(--border-dark)}
 .v-b .logo-bar img{height:34px;width:auto;vertical-align:middle}
 .b-wrap{max-width:760px;margin:0 auto;padding:0 24px}
@@ -119,7 +122,14 @@ body{font-family:var(--font-body);overflow-x:hidden}
   box-shadow:0 25px 60px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.08);
 }
 .phone-frame-inner{border-radius:26px;overflow:hidden;background:#fff;position:relative;aspect-ratio:9/19.5}
-.phone-frame-inner video{width:100%;height:100%;object-fit:cover;display:block}
+.phone-frame-inner video{
+  width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;
+}
+.phone-frame-inner video::-webkit-media-controls,
+.phone-frame-inner video::-webkit-media-controls-enclosure,
+.phone-frame-inner video::-webkit-media-controls-start-playback-button{
+  display:none !important;-webkit-appearance:none;opacity:0;pointer-events:none;width:0;height:0;
+}
 .phone-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:90px;height:28px;background:#000;border-radius:0 0 18px 18px;z-index:2}
 .phone-back{right:10%;top:0;z-index:1;transform:rotate(2deg)}
 .phone-front{left:8%;top:40px;z-index:2;transform:rotate(-1deg)}
@@ -155,8 +165,8 @@ html.quiz-focus .quiz-veil{opacity:1}
   transition:box-shadow .4s ease,transform .4s ease;
 }
 html.quiz-focus .quiz-card{box-shadow:0 0 0 4px var(--accent),0 28px 90px rgba(0,0,0,.55)}
-.quiz-card [data-tf-widget]{width:100% !important;height:560px !important}
-@media(min-width:720px){.quiz-card [data-tf-widget]{height:640px !important}}
+.quiz-card [data-tf-widget]{width:100% !important;min-height:420px;max-height:640px;height:auto !important}
+.quiz-card iframe{max-height:640px}
 .micro{
   color:var(--text-muted-dark);font-size:14.5px;line-height:1.6;text-align:center;
   max-width:640px;margin:14px auto 0;
@@ -187,7 +197,7 @@ html.quiz-focus .quiz-card{box-shadow:0 0 0 4px var(--accent),0 28px 90px rgba(0
 .sig-name{font-weight:700;color:#fff}
 .sig-title{font-size:13px;color:var(--text-muted-dark);line-height:1.4}
 .b-cta{padding:8px 0 48px;text-align:center}
-.page-footer{background:#0a0c0e;color:var(--text-muted-dark);text-align:center;padding:28px 20px;font-size:13px}
+.page-footer{background:#0a0c0e;color:var(--text-muted-dark);text-align:center;padding:28px 20px 20px;font-size:13px;margin:0}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
@@ -203,6 +213,7 @@ html.quiz-focus .quiz-card{box-shadow:0 0 0 4px var(--accent),0 28px 90px rgba(0
     <div id="tf-gb-widget"
          data-tf-widget="sTbsRn"
          data-tf-opacity="100"
+         data-tf-inline-on-mobile
          data-tf-iframe-props="title=GreaseBook Quiz"
          data-tf-transitive-search-params
          data-tf-medium="snippet"
@@ -245,7 +256,7 @@ html.quiz-focus .quiz-card{box-shadow:0 0 0 4px var(--accent),0 28px 90px rgba(0
         <div class="phone-frame phone-back">
           <div class="phone-frame-inner">
             <div class="phone-notch"></div>
-            <video autoplay loop muted playsinline>
+            <video autoplay loop muted playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback">
               <source src="https://raw.githubusercontent.com/younggunner/tinypumper-field-images/main/phone1.mp4" type="video/mp4">
             </video>
           </div>
@@ -253,7 +264,7 @@ html.quiz-focus .quiz-card{box-shadow:0 0 0 4px var(--accent),0 28px 90px rgba(0
         <div class="phone-frame phone-front">
           <div class="phone-frame-inner">
             <div class="phone-notch"></div>
-            <video autoplay loop muted playsinline>
+            <video autoplay loop muted playsinline webkit-playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback">
               <source src="https://raw.githubusercontent.com/younggunner/tinypumper-field-images/main/video-2.mp4" type="video/mp4">
             </video>
           </div>
@@ -274,6 +285,8 @@ html.quiz-focus .quiz-card{box-shadow:0 0 0 4px var(--accent),0 28px 90px rgba(0
         <div id="tf-gb-widget-b"
              data-tf-widget="sTbsRn"
              data-tf-opacity="100"
+             data-tf-inline-on-mobile
+             data-tf-auto-resize="360,640"
              data-tf-iframe-props="title=GreaseBook Quiz"
              data-tf-transitive-search-params
              data-tf-medium="snippet"
@@ -353,6 +366,21 @@ html.quiz-focus .quiz-card{box-shadow:0 0 0 4px var(--accent),0 28px 90px rgba(0
       }, { threshold: [0.25, 0.4, 0.6, 0.8] });
       io.observe(card);
     }
+    document.querySelectorAll('.phone-frame-inner video').forEach(function (v) {
+      v.muted = true;
+      v.defaultMuted = true;
+      v.playsInline = true;
+      v.setAttribute('playsinline', '');
+      v.setAttribute('webkit-playsinline', '');
+      v.loop = true;
+      v.controls = false;
+      function kick() { v.play().catch(function () {}); }
+      kick();
+      v.addEventListener('pause', function () { if (!document.hidden) kick(); });
+      ['touchstart', 'click', 'scroll'].forEach(function (ev) {
+        window.addEventListener(ev, kick, { passive: true });
+      });
+    });
   }
 })();
 </script>
