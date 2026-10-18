@@ -99,6 +99,23 @@ class ApprovedAttribution(unittest.TestCase):
         )
         self.assertIn("clickat_1791000000000", self.tokens(cal))
 
+    def test_placeholders_removed_from_page_address(self):
+        ctx = self.browser.new_context()
+        try:
+            page = ctx.new_page()
+            page.route("**/*", lambda r: r.continue_() if r.request.url.startswith(self.base) else
+                       r.fulfill(status=200, content_type="text/javascript", body=STUB)
+                       if "assets.calendly.com" in r.request.url and r.request.url.endswith("widget.js") else r.abort())
+            page.goto(f"{self.base}/approved/?name=Test&utm_source=google&utm_term=_____&msclkid=_____&fbclid=")
+            page.wait_for_function("window.__cal && window.__cal.length")
+            qs = parse_qs(urlparse(page.url).query, keep_blank_values=True)
+        finally:
+            ctx.close()
+        self.assertEqual(qs.get("utm_source"), ["google"])
+        self.assertNotIn("utm_term", qs)
+        self.assertNotIn("msclkid", qs)
+        self.assertEqual(qs.get("fbclid"), [""])
+
     def test_invalid_visitor_id_is_dropped(self):
         cal = self.booking("utm_source=google", {"gb_uid": "not-a-uuid"})
         self.assertFalse(any(t.startswith("gbuid_") for t in self.tokens(cal)))

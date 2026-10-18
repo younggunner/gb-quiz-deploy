@@ -455,6 +455,16 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 <script>
 (function(){
   var params = new URLSearchParams(window.location.search);
+  // Calendly's embed copies utm_* straight from this page's address, so drop
+  // Typeform's "_____" blanks from the address before the widget loads.
+  try {
+    var kept = new URLSearchParams();
+    params.forEach(function(v, k){ if (!/^_+$/.test(v.trim())) kept.append(k, v); });
+    if (kept.toString() !== params.toString()) {
+      var qs = kept.toString();
+      history.replaceState(null, '', window.location.pathname + (qs ? '?' + qs : '') + window.location.hash);
+    }
+  } catch (_) {}
   var name    = params.get('name') || '';
   var email   = params.get('email') || '';
   var company = params.get('a1') || '';
