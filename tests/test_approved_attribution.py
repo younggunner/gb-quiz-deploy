@@ -15,7 +15,8 @@ from urllib.parse import parse_qs, urlparse
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-STUB = "window.Calendly={initInlineWidget:function(o){(window.__cal=window.__cal||[]).push(o.url);}};"
+STUB = ("window.Calendly={initInlineWidget:function(o){(window.__cal=window.__cal||[]).push(o.url);"
+        "(window.__calSearch=window.__calSearch||[]).push(location.search);}};")
 UID = "0f8b6c1e-1234-4abc-9def-0123456789ab"
 
 
@@ -108,7 +109,8 @@ class ApprovedAttribution(unittest.TestCase):
                        if "assets.calendly.com" in r.request.url and r.request.url.endswith("widget.js") else r.abort())
             page.goto(f"{self.base}/approved/?name=Test&utm_source=google&utm_term=_____&msclkid=_____&fbclid=")
             page.wait_for_function("window.__cal && window.__cal.length")
-            qs = parse_qs(urlparse(page.url).query, keep_blank_values=True)
+            # The address Calendly could copy is the one present when its widget starts.
+            qs = parse_qs(page.evaluate("window.__calSearch[0]").lstrip("?"), keep_blank_values=True)
         finally:
             ctx.close()
         self.assertEqual(qs.get("utm_source"), ["google"])
