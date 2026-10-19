@@ -7,3 +7,8 @@ GreaseBook quiz funnel — GitHub Pages. Serves `quiz.greasebook.com` (after DNS
 - `/approved` — booking page (dual Calendly, pricing prep). Built + approved 2026-07-13.
 - `/success` — post-booking confirmation (Calendly redirect target). "Tentatively scheduled" + videos + testimonials.
 - NO CNAME file yet — added at DNS cutover so github.io preview URLs work first.
+
+## Tests
+
+`scripts/run-tests` runs the browser tests for `/approved` (Calendly is stubbed and every outside request is blocked).
+One-time setup: `python3 -m pip install playwright && python3 -m playwright install chromium`.
