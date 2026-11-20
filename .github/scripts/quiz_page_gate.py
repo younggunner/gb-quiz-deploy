@@ -11,6 +11,7 @@ Each rule is a scar:
   R10 GB-only stats in TP files
   R13 missing engagement-beacon include (root meta-refresh stub exempt)
   WP5 missing canonical; wrong Typeform form id; HTML over 500 KB
+  rural  raw.githubusercontent.com (same rural-mobile ban as www)
 
 --self-test plants violations in temp copies and asserts the gate catches them,
 then asserts the real tree is clean. That is the WP5 acceptance ("fails on a
@@ -103,6 +104,8 @@ def check_file(path: Path, brand: str, form_id: str) -> list[str]:
         fails.append(f"{rel}: em dash in visible copy (R9)")
     if brand == "tp" and GB_STATS.search(text):
         fails.append(f"{rel}: GB-only stats in TP file (R10)")
+    if "raw.githubusercontent.com" in text:
+        fails.append(f"{rel}: raw.githubusercontent.com (rural-mobile ban)")
     for m in re.finditer(r'data-tf-widget=["\']([^"\']+)["\']', text):
         if m.group(1) != form_id:
             fails.append(
@@ -139,6 +142,7 @@ def self_test() -> int:
         "no-beacon": src.replace(BEACON_NEEDLE, "NOT-A-BEACON"),
         "no-canon": re.sub(r'<link rel="canonical"[^>]*>', "", src, count=1),
         "wrong-form": src.replace(f'data-tf-widget="{form_id}"', 'data-tf-widget="XXXXXXX"'),
+        "raw-github": src + '\n<video src="https://raw.githubusercontent.com/younggunner/tinypumper-field-images/main/phone1.mp4"></video>\n',
         "coarse-source": src.replace(
             "if (!hidden.source && hidden.utm_source)",
             "if (!hidden.source) { hidden.source = document.referrer ? 'referral' : 'direct'; }\n  if (!hidden.source && hidden.utm_source)",
