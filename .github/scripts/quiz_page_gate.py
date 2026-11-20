@@ -11,6 +11,8 @@ Each rule is a scar:
   R10 GB-only stats in TP files
   R13 missing engagement-beacon include (root meta-refresh stub exempt)
   WP5 missing canonical; wrong Typeform form id; HTML over 500 KB
+  rural  raw.githubusercontent.com (same rural-mobile ban as www)
+  video  any <video> tag (Greg 2026-11-20: no video on the quiz; Variant B was killed)
 
 --self-test plants violations in temp copies and asserts the gate catches them,
 then asserts the real tree is clean. That is the WP5 acceptance ("fails on a
@@ -35,6 +37,10 @@ BEACON_NEEDLE = "lander-engagement"
 COARSE_SOURCE = re.compile(
     r"document\.referrer\s*\?\s*['\"]referral['\"]\s*:\s*['\"]direct['\"]"
 )
+# Greg 2026-11-20: "there is no video on the quiz"; the Variant-B layout test was
+# killed. WHY: its two phone videos stayed in the page source after the test ended,
+# so every visitor's phone started downloading up to 6.9 MB it never showed.
+VIDEO_TAG = re.compile(r"<video\b", re.I)
 GB_STATS = re.compile(
     r"6%\s*pump[- ]to[- ]net|98%\s*success\s*rate|200%\s*money[- ]back|"
     r"\b2\s+to\s+2,000\s+wells\b",
@@ -103,6 +109,10 @@ def check_file(path: Path, brand: str, form_id: str) -> list[str]:
         fails.append(f"{rel}: em dash in visible copy (R9)")
     if brand == "tp" and GB_STATS.search(text):
         fails.append(f"{rel}: GB-only stats in TP file (R10)")
+    if "raw.githubusercontent.com" in text:
+        fails.append(f"{rel}: raw.githubusercontent.com (rural-mobile ban)")
+    if VIDEO_TAG.search(text):
+        fails.append(f"{rel}: <video> tag (no video on the quiz, Greg 2026-11-20)")
     for m in re.finditer(r'data-tf-widget=["\']([^"\']+)["\']', text):
         if m.group(1) != form_id:
             fails.append(
@@ -139,6 +149,9 @@ def self_test() -> int:
         "no-beacon": src.replace(BEACON_NEEDLE, "NOT-A-BEACON"),
         "no-canon": re.sub(r'<link rel="canonical"[^>]*>', "", src, count=1),
         "wrong-form": src.replace(f'data-tf-widget="{form_id}"', 'data-tf-widget="XXXXXXX"'),
+        # An image, not a video, so only the raw-GitHub rule can catch this plant.
+        "raw-github": src + '\n<img src="https://raw.githubusercontent.com/younggunner/tinypumper-field-images/main/phone1.png">\n',
+        "video-tag": src + '\n<video autoplay loop muted playsinline><source src="../assets/phone1.mp4" type="video/mp4"></video>\n',
         "coarse-source": src.replace(
             "if (!hidden.source && hidden.utm_source)",
             "if (!hidden.source) { hidden.source = document.referrer ? 'referral' : 'direct'; }\n  if (!hidden.source && hidden.utm_source)",
